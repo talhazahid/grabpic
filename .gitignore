@@ -1,0 +1,14 @@
+src/**/bin/
+src/**/obj/
+dist/
+reference/
+artifacts/
+submission/
+tools/.cache/
+packaging/bin/
+packaging/obj/
+*.pfx
+*.p12
+*.cer
+*.user
+*_wpftmp.csproj

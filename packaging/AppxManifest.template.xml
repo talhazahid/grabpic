@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10" xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4" xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5" xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap desktop desktop4 desktop5 com rescap">
+ <Identity Name="Geeklabs.GrabPic" Publisher="CN=5B135F6F-4181-4A69-A7BE-6BAA39528EBE" Version="0.5.0.0" ProcessorArchitecture="x64"/>
+ <Properties><DisplayName>Grab Pic</DisplayName><PublisherDisplayName>Owl Dev</PublisherDisplayName><Description>A simple, open-source screenshot tool for Windows.</Description><Logo>Assets\StoreLogo.png</Logo></Properties>
+ <Resources><Resource Language="en-us"/></Resources>
+ <Dependencies><TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.22000.0" MaxVersionTested="10.0.26100.0"/></Dependencies>
+ <Applications><Application Id="GrabPic" Executable="GrabPic.exe" EntryPoint="Windows.FullTrustApplication">
+  <uap:VisualElements DisplayName="Grab Pic" Description="Capture. Copy. Carry on." BackgroundColor="transparent" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png"><uap:DefaultTile ShortName="Grab Pic" Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png"/></uap:VisualElements>
+  <Extensions>
+   <desktop:Extension Category="windows.startupTask" Executable="GrabPic.Startup.exe" EntryPoint="Windows.FullTrustApplication"><desktop:StartupTask TaskId="GrabPicStartup" Enabled="true" DisplayName="Grab Pic"/></desktop:Extension>
+   <com:Extension Category="windows.comServer"><com:ComServer><com:SurrogateServer DisplayName="Grab Pic desktop menu"><com:Class Id="4D57B652-A8D7-4DDA-A7FA-49A617B76290" Path="GrabPic.ShellExtension.dll" ThreadingModel="STA"/></com:SurrogateServer></com:ComServer></com:Extension>
+   <desktop4:Extension Category="windows.fileExplorerContextMenus"><desktop4:FileExplorerContextMenus><desktop5:ItemType Type="Directory\Background"><desktop5:Verb Id="GrabPic" Clsid="4D57B652-A8D7-4DDA-A7FA-49A617B76290"/></desktop5:ItemType></desktop4:FileExplorerContextMenus></desktop4:Extension>
+  </Extensions>
+ </Application></Applications>
+ <Capabilities><rescap:Capability Name="runFullTrust"/></Capabilities>
+</Package>

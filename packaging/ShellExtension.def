@@ -1,0 +1,4 @@
+LIBRARY GrabPic.ShellExtension
+EXPORTS
+    DllGetClassObject
+    DllCanUnloadNow

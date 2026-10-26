@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType><Version>0.5.0</Version>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <UseWPF>true</UseWPF><ApplicationIcon>Assets/GrabPic.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup><Resource Include="Assets/GrabPic.ico"/><Resource Include="Assets/GrabPic-256.png"/><Resource Include="Assets/GrabPic-128.png"/></ItemGroup>
+
+</Project>
