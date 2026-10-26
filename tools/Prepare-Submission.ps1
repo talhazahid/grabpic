@@ -2,13 +2,15 @@ $ErrorActionPreference='Stop'
 $root=Split-Path $PSScriptRoot -Parent
 $output="$root/submission"
 foreach($folder in @('listing','screenshots','packages','icons')){New-Item -ItemType Directory -Force "$output/$folder" | Out-Null}
+Add-Type -AssemblyName System.Drawing
+foreach($file in Get-ChildItem "$root/docs/images/0*.png") { $image=[System.Drawing.Image]::FromFile($file.FullName); try { if($image.Width -lt 1366 -or $image.Height -lt 768){throw "Store screenshot is too small: $($file.Name)"} } finally {$image.Dispose()} }
 Copy-Item "$root/docs/images/0*.png" "$output/screenshots" -Force
 Copy-Item "$root/src/GrabPic/Assets/GrabPic.svg" "$output/icons/Grabpic-master.svg" -Force
-Copy-Item "$root/dist/Setup/GrabPic-Setup-0.5.0-x64.exe" "$output/packages" -Force
+Copy-Item "$root/dist/Setup/GrabPic-Setup-0.5.1-x64.exe" "$output/packages" -Force
 Copy-Item "$root/docs/STORE.md" "$output/START-HERE.md" -Force
 Copy-Item "$root/docs/PRIVACY.md" "$output/listing/Privacy-policy.md" -Force
 $listing=[ordered]@{
- name='Grabpic'; publisher='Owl Dev'; version='0.5.0'; license='GPL-3.0'; category='Productivity'; priceSuggestion='Free'; language='en-US'
+ name='Grabpic'; publisher='Owl Dev'; version='0.5.1'; license='GPL-3.0'; category='Productivity'; priceSuggestion='Free'; language='en-US'
  shortDescription='An easy, open-source screenshot app for Windows. Capture, copy, and keep things organized.'
  description='Grabpic makes screenshots simple. Capture your full screen or drag to select an area, copy the result to your clipboard, and save it automatically in neatly organized date folders. Customize your keyboard or mouse shortcuts, choose PNG or JPG, and keep capturing from the tray without opening the app each time. A dark interface and a remembered latest capture keep the experience straightforward. No account, uploads, ads, or analytics. Optional clipboard-image saving is off by default.'
  features=@('Full-screen and area capture','Current-monitor or all-monitor screenshots','Clipboard copying and automatic saving','Daily, weekly, or monthly folders','Custom keyboard and mouse shortcuts','PNG and JPG output with quality control','Dark interface and background tray operation','Latest-capture recovery after restart','Optional local clipboard-image saving','Open source under GPL-3.0')
@@ -40,5 +42,5 @@ Add-Type -AssemblyName System.Drawing
 $assets=foreach($file in $files){if($file.Extension -eq '.png'){ $image=[System.Drawing.Image]::FromFile($file.FullName); try{[ordered]@{file=$file.FullName.Substring($output.Length+1).Replace('\','/');width=$image.Width;height=$image.Height;bytes=$file.Length}}finally{$image.Dispose()} }}
 $assets | ConvertTo-Json -Depth 5 | Set-Content "$output/Asset-inventory.json" -Encoding utf8
 Get-ChildItem "$output/packages" -File | Get-FileHash -Algorithm SHA256 | ForEach-Object {$_.Hash+'  '+[IO.Path]::GetFileName($_.Path)} | Set-Content "$output/SHA256SUMS.txt"
-Compress-Archive -Path "$output/*" -DestinationPath "$root/dist/Grabpic-Submission-0.5.0.zip" -Force
+Compress-Archive -Path "$output/*" -DestinationPath "$root/dist/Grabpic-Submission-0.5.1.zip" -Force
 Write-Output "Submission files: $output"

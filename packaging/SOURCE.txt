@@ -1,10 +1,10 @@
-Grabpic 0.5.0 is free software under the GNU GPL version 3.
+Grabpic 0.5.1 is free software under the GNU GPL version 3.
 The license is included in LICENSE.txt.
 
 Corresponding source and build instructions:
-https://github.com/talhazahid/grabpic/tree/v0.5.0
+https://github.com/talhazahid/grabpic/tree/v0.5.1
 
 Source archives:
-https://github.com/talhazahid/grabpic/archive/refs/tags/v0.5.0.zip
+https://github.com/talhazahid/grabpic/archive/refs/tags/v0.5.1.zip
 
 Runtime and native-library notices are included in the Licenses directory.

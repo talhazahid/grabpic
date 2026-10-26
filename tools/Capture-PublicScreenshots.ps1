@@ -11,6 +11,7 @@ public class PublicCapture {
  [DllImport("user32.dll")] public static extern bool PrintWindow(IntPtr hwnd,IntPtr dc,uint flags);
  [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr hwnd,out Rect r);
  [DllImport("user32.dll")] public static extern bool SetWindowPos(IntPtr hwnd,IntPtr after,int x,int y,int w,int h,uint flags);
+ [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hwnd,int command);
  [DllImport("user32.dll")] public static extern IntPtr SetThreadDpiAwarenessContext(IntPtr value);
  public struct Rect { public int Left,Top,Right,Bottom; }
 }
@@ -40,8 +41,11 @@ try {
  [PublicCapture]::SetWindowPos($handle,[IntPtr]::Zero,200,70,1366,900,0x14) | Out-Null
  Start-Sleep -Milliseconds 800
  function Save-Window([string]$name) {
+  [PublicCapture]::ShowWindow($handle,9) | Out-Null
+  [PublicCapture]::SetWindowPos($handle,[IntPtr]::Zero,200,70,1366,900,0x14) | Out-Null
   Start-Sleep -Milliseconds 400
   $r=New-Object PublicCapture+Rect; [PublicCapture]::GetWindowRect($handle,[ref]$r) | Out-Null
+  if(($r.Right-$r.Left) -lt 1366 -or ($r.Bottom-$r.Top) -lt 768){throw 'App was minimized or resized during screenshot capture.'}
   $image=[System.Drawing.Bitmap]::new($r.Right-$r.Left,$r.Bottom-$r.Top); $draw=[System.Drawing.Graphics]::FromImage($image); $draw.Clear([System.Drawing.Color]::FromArgb(20,21,27)); $dc=$draw.GetHdc()
   try {if(![PublicCapture]::PrintWindow($handle,$dc,2)){throw 'Window capture failed.'}}finally{$draw.ReleaseHdc($dc)}
   $image.Save("$root/docs/images/$name.png",[System.Drawing.Imaging.ImageFormat]::Png); $draw.Dispose(); $image.Dispose()

@@ -26,7 +26,7 @@ The Store listing becomes downloadable after Microsoft approves and publishes th
 
 ## Get started
 
-1. Download `GrabPic-Setup-0.5.0-x64.exe` from [Releases](https://github.com/talhazahid/grabpic/releases/latest), or install from the Store once published.
+1. Download `GrabPic-Setup-0.5.1-x64.exe` from [Releases](https://github.com/talhazahid/grabpic/releases/latest), or install from the Store once published.
 2. Run setup. It adds the desktop menu and starts Grabpic in the tray. The standard installer requests administrator access to register its system-wide menu.
 3. Use a capture shortcut, the tray menu, or right-click empty desktop space and choose **Grab Pic**. For the standard installer on Windows 11, use **Show more options**.
 4. Paste the image wherever you need it. Your saved copy is already in the capture folder.

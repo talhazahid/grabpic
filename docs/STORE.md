@@ -11,7 +11,7 @@ The Store build is an x64 full-trust desktop MSIX. It uses the same WPF capture 
 | Publisher display name | `Owl Dev` |
 | Package family | `Geeklabs.GrabPic_r9bpyvrsmjz2p` |
 | Store ID | `9PJ3HBXBCTX1` |
-| Version | `0.5.0.0` |
+| Version | `0.5.1.0` |
 
 Keep the identity stable and increase the version for each new upload; the fourth component remains zero for Store submissions.
 
@@ -28,7 +28,7 @@ The unsigned output is suitable for submission to Partner Center: Microsoft sign
 ## Upload
 
 1. Open the existing Grabpic product in Partner Center and create a submission.
-2. Upload `submission/packages/Grabpic-0.5.0.0-x64.msix` in Packages.
+2. Upload `submission/packages/Grabpic-0.5.1.0-x64.msix` in Packages.
 3. Use the listing text and metadata in `submission/listing`.
 4. Upload the four PNGs in `submission/screenshots` in numeric order. They are 1366 × 900, above the Desktop minimum of 1366 × 768.
 5. Use `submission/icons/Grabpic-300.png` for the 1:1 Store listing logo. Other sizes and all package-qualified assets are provided as well.
