@@ -6,7 +6,7 @@
 
 Grabpic is a free, open-source screenshot app for Windows. Grab your full screen or drag to select an area, get the image on your clipboard, and let Grabpic keep your captures neatly organized. It stays quietly in the system tray until you need it.
 
-[Download for Windows](https://github.com/talhazahid/grabpic/releases/latest) · [Microsoft Store listing](https://apps.microsoft.com/detail/9PJ3HBXBCTX1) · [Report an issue](https://github.com/talhazahid/grabpic/issues) · [GPL-3.0 license](LICENSE)
+[Website](https://talhazahid.github.io/grabpic/) · [Privacy policy](https://talhazahid.github.io/grabpic/privacy/) · [Download for Windows](https://github.com/talhazahid/grabpic/releases/latest) · [Microsoft Store listing](https://apps.microsoft.com/detail/9PJ3HBXBCTX1) · [Report an issue](https://github.com/talhazahid/grabpic/issues) · [GPL-3.0 license](LICENSE)
 
 The Store listing becomes downloadable after Microsoft approves and publishes the submission. Windows installer releases are available independently.
 
@@ -49,7 +49,7 @@ Change any binding in **Settings → Shortcuts**. When you assign a Windows-key 
 
 Choose a capture folder, date grouping, image format, and quality in Settings. Closing the window keeps Grabpic in the tray; use **Quit Grab Pic** to exit completely. Screenshots capture the currently visible desktop, not hidden virtual desktops.
 
-Your captures and preferences stay on your computer. A cloud-synced folder can still be synchronized by its provider. Clipboard monitoring is off by default; when enabled, it saves image content locally while Grabpic is running. See the [privacy policy](docs/PRIVACY.md).
+Your captures and preferences stay on your computer. A cloud-synced folder can still be synchronized by its provider. Clipboard monitoring is off by default; when enabled, it saves image content locally while Grabpic is running. See the [privacy policy](https://talhazahid.github.io/grabpic/privacy/).
 
 ![Capture saving settings](docs/images/03-saving.png)
 

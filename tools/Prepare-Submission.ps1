@@ -15,7 +15,7 @@ $listing=[ordered]@{
  description='Grabpic makes screenshots simple. Capture your full screen or drag to select an area, copy the result to your clipboard, and save it automatically in neatly organized date folders. Customize your keyboard or mouse shortcuts, choose PNG or JPG, and keep capturing from the tray without opening the app each time. A dark interface and a remembered latest capture keep the experience straightforward. No account, uploads, ads, or analytics. Optional clipboard-image saving is off by default.'
  features=@('Full-screen and area capture','Current-monitor or all-monitor screenshots','Clipboard copying and automatic saving','Daily, weekly, or monthly folders','Custom keyboard and mouse shortcuts','PNG and JPG output with quality control','Dark interface and background tray operation','Latest-capture recovery after restart','Optional local clipboard-image saving','Open source under GPL-3.0')
  keywords=@('screenshot','screen capture','clipboard','productivity','open source','Windows')
- website='https://github.com/talhazahid/grabpic'; support='https://github.com/talhazahid/grabpic/issues'; privacy='https://github.com/talhazahid/grabpic/blob/main/docs/PRIVACY.md'; store='https://apps.microsoft.com/detail/9PJ3HBXBCTX1'
+ website='https://talhazahid.github.io/grabpic/'; support='https://github.com/talhazahid/grabpic/issues'; privacy='https://talhazahid.github.io/grabpic/privacy/'; store='https://apps.microsoft.com/detail/9PJ3HBXBCTX1'
  systemRequirements='Windows 11 (build 22000 or later), Intel/AMD x64.'
 }
 $listing | ConvertTo-Json -Depth 6 | Set-Content "$output/listing/Listing.json" -Encoding utf8

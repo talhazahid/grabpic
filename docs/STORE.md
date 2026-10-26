@@ -32,7 +32,7 @@ The unsigned output is suitable for submission to Partner Center: Microsoft sign
 3. Use the listing text and metadata in `submission/listing`.
 4. Upload the four PNGs in `submission/screenshots` in numeric order. They are 1366 × 900, above the Desktop minimum of 1366 × 768.
 5. Use `submission/icons/Grabpic-300.png` for the 1:1 Store listing logo. Other sizes and all package-qualified assets are provided as well.
-6. Link the [privacy policy](https://github.com/talhazahid/grabpic/blob/main/docs/PRIVACY.md) and [support page](https://github.com/talhazahid/grabpic/issues).
+6. Link the [privacy policy](https://talhazahid.github.io/grabpic/privacy/) and [support page](https://github.com/talhazahid/grabpic/issues).
 7. Complete the account-specific pricing/markets, properties, declarations, age-rating questionnaire, and certification sections in Partner Center. These cannot be generated as app files.
 
 Microsoft must approve and publish the submission before the [Store listing](https://apps.microsoft.com/detail/9PJ3HBXBCTX1) becomes downloadable.
