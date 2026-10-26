@@ -21,7 +21,7 @@ Keep the identity stable and increase the version for each new upload; the fourt
 powershell -ExecutionPolicy Bypass -File tools/Build-Store.ps1
 ```
 
-The script regenerates icon assets, publishes the self-contained application, restores the pinned Windows SDK build tools, downloads a checksum-verified C++ toolchain, builds and verifies the native menu, and runs MakeAppx manifest validation. The result is under `submission/packages`.
+The script regenerates icon assets, publishes the self-contained application, restores the pinned Windows SDK build tools, downloads a checksum-verified C++ toolchain, builds and verifies the native menu, indexes all icon scales and target sizes into a single resources.pri, and runs MakeAppx manifest validation. The result is under `submission/packages`.
 
 The unsigned output is suitable for submission to Partner Center: Microsoft signs Store-distributed packages. For local test signing, pass `-SigningThumbprint <thumbprint>` for an existing code-signing certificate whose subject exactly matches the manifest publisher. The script never exports a private key or changes certificate trust or sideload policy.
 

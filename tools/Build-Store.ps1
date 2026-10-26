@@ -41,6 +41,10 @@ Copy-Item "$root/packaging/Licenses" "$stage/Licenses" -Recurse
 if($LASTEXITCODE -ne 0){throw 'Native verification compilation failed.'}
 & "$native/VerifyShell.exe" "$stage/GrabPic.ShellExtension.dll"
 if($LASTEXITCODE -ne 0){throw 'Native desktop command verification failed.'}
+$makepri=Join-Path $sdk.DirectoryName 'makepri.exe'
+& $makepri new /pr $stage /cf "$root/packaging/PriConfig.xml" /of "$stage/resources.pri" /o | Out-Null
+if($LASTEXITCODE -ne 0){throw 'Store icon resource indexing failed.'}
+Write-Output 'Indexed Store icon scales and target sizes in resources.pri.'
 $output="$root/submission/packages/Grabpic-$version-x64.msix"
 & $sdk.FullName pack /d $stage /p $output /o
 if($LASTEXITCODE -ne 0){throw 'MSIX validation/packaging failed.'}
