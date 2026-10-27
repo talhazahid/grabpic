@@ -11,7 +11,7 @@ The Store build is an x64 full-trust desktop MSIX. It uses the same WPF capture 
 | Publisher display name | `Owl Dev` |
 | Package family | `Geeklabs.GrabPic_r9bpyvrsmjz2p` |
 | Store ID | `9PJ3HBXBCTX1` |
-| Version | `0.5.1.0` |
+| Version | `0.6.0.0` |
 
 Keep the identity stable and increase the version for each new upload; the fourth component remains zero for Store submissions.
 
@@ -28,7 +28,7 @@ The unsigned output is suitable for submission to Partner Center: Microsoft sign
 ## Upload
 
 1. Open the existing Grabpic product in Partner Center and create a submission.
-2. Upload `submission/packages/Grabpic-0.5.1.0-x64.msix` in Packages.
+2. Upload `submission/packages/Grabpic-0.6.0.0-x64.msix` in Packages.
 3. Use the listing text and metadata in `submission/listing`.
 4. Upload the four PNGs in `submission/screenshots` in numeric order. They are 1366 × 900, above the Desktop minimum of 1366 × 768.
 5. Use `submission/icons/Grabpic-300.png` for the 1:1 Store listing logo. Other sizes and all package-qualified assets are provided as well.
@@ -38,6 +38,8 @@ The unsigned output is suitable for submission to Partner Center: Microsoft sign
 Microsoft must approve and publish the submission before the [Store listing](https://apps.microsoft.com/detail/9PJ3HBXBCTX1) becomes downloadable.
 
 ## Validation limits
+
+Version 0.6.0 includes the native-messaging companion and narrow Windows 11 flexible-virtualization exclusions for its three per-user host-registration keys and two local browser-transfer folders. The additional `unvirtualizedResources` restricted capability requires a Partner Center explanation/approval: browsers must discover the local native host outside the package, and the browser-launched host and packaged app must exchange temporary screenshot files. No other registry keys or folders are excluded. Do not remove this declaration and claim browser integration still works in the Store build. Browser extensions are separately enabled and require their own browser-store publication/signing for ordinary public installation; test ZIPs and instructions are included in `submission/browser-extensions`.
 
 Local checks cover package schema, identity, native COM command enumeration and icon resolution, application checks, and assets. The current development PC rejects local MSIX installation because its certificate/sideload policy does not permit it. No trust or sideload settings are changed by the build. Full packaged installation, startup-task activation, packaged shell registration, Windows App Certification Kit, and Store certification remain checks for an appropriately configured test machine or Microsoft's submission process. This is not a certification claim.
 

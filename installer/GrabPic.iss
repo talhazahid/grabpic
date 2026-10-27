@@ -1,4 +1,4 @@
-#define AppVersion "0.5.1"
+#define AppVersion "0.6.0"
 
 [Setup]
 AppId={{B50DB06B-07A3-4540-99C6-4C52064B1E2D}
@@ -35,6 +35,9 @@ Name: "desktopicon"; Description: "Create a desktop shortcut"; GroupDescription:
 
 [Files]
 Source: "..\dist\GrabPic\GrabPic.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\dist\GrabPic\GrabPic.BrowserHost.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\dist\Browser\*"; DestDir: "{app}\BrowserExtensions"; Flags: ignoreversion recursesubdirs
+Source: "..\docs\BROWSERS.md"; DestDir: "{app}\BrowserExtensions"; DestName: "README.md"; Flags: ignoreversion
 Source: "..\LICENSE"; DestDir: "{app}"; DestName: "LICENSE.txt"; Flags: ignoreversion
 Source: "..\packaging\Licenses\*"; DestDir: "{app}\Licenses"; Flags: ignoreversion recursesubdirs
 Source: "..\packaging\SOURCE.txt"; DestDir: "{app}"; Flags: ignoreversion

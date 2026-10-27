@@ -97,6 +97,7 @@ public sealed class MainWindow : Window
         Section("CAPTURE BEHAVIOR");
         page.Children.Add(Card(Stack(Row(Text("Full-screen captures"), Select(new[] { "Current monitor", "All monitors" }, settings.Monitor, value => { settings.Monitor = value; Save(); })), Gap(14), Check("Copy captures to clipboard", settings.Copy, value => { settings.Copy = value; Save(); }), Check("Save images copied from other apps", settings.Watch, value => { settings.Watch = value; ignoredClipboard = Native.GetClipboardSequenceNumber(); Save(); }), Text("Clipboard saving works while Grab Pic is running.", 12, Muted), Gap(8), StartupControl())));
         Section("DESKTOP INTEGRATION");
+        page.Children.Add(Card(Stack(Text("Browser right-click menu", 15), Gap(7), Text("Enable the companion extension for scrolling-page, visible-view, and area capture.", 12, Muted), Gap(12), Button("", "Browser setup guide ↗", () => Process.Start(new ProcessStartInfo("https://github.com/talhazahid/grabpic/blob/main/docs/BROWSERS.md") { UseShellExecute = true })))));
         if (Integration.IsPackaged) { page.Children.Add(Card(Stack(Text("Desktop menu", 15), Gap(7), Text("Windows installs and removes the capture menu with the Store package.", 12, Muted)))); return; }
         var actions = new StackPanel { Orientation = Orientation.Horizontal }; actions.Children.Add(Button("", "Enable menu", () => { try { Integration.Menu(true); status.Text = "Enabled. Right-click the desktop → Show more options → Grab Pic."; } catch (Exception e) { status.Text = e.Message; } })); var remove = Button("", "Remove menu", () => { try { Integration.Menu(false); status.Text = "Desktop menu removed."; } catch (Exception e) { status.Text = e.Message; } }); remove.Margin = new Thickness(10, 0, 0, 0); actions.Children.Add(remove);
         page.Children.Add(Card(Stack(Text("Capture from your desktop", 15), Gap(7), Text("This preview uses Windows’ “Show more options” menu.\nSetup adds this menu automatically.", 12, Muted), Gap(16), actions)));
@@ -182,7 +183,26 @@ public sealed class MainWindow : Window
         if (request == navigationVersion) CapturePage();
     }
     private void ShowSettings() { Show(); WindowState = WindowState.Normal; Activate(); SettingsPage(); }
-    public void HandleCommand(string command) { switch (command) { case "full": BeginCapture(false); break; case "area": BeginCapture(true); break; case "folder": OpenFolder(); break; case "settings": ShowSettings(); break; case "quit": Application.Current.Shutdown(); break; case "background": break; default: ShowApp(); break; } }
+    public void HandleCommand(string command) { if (command.StartsWith("browser:", StringComparison.Ordinal)) { ImportBrowser(command[8..]); return; } switch (command) { case "full": BeginCapture(false); break; case "area": BeginCapture(true); break; case "folder": OpenFolder(); break; case "settings": ShowSettings(); break; case "quit": Application.Current.Shutdown(); break; case "background": break; default: ShowApp(); break; } }
+    private async void ImportBrowser(string path)
+    {
+        string? receipt = null;
+        bool ownsCapture = false;
+        try
+        {
+            string resolved = Path.GetFullPath(path);
+            if (!string.Equals(Path.GetDirectoryName(resolved), Path.GetFullPath(BrowserBridge.Inbox), StringComparison.OrdinalIgnoreCase) || Path.GetExtension(resolved) != ".png") throw new InvalidDataException("Invalid browser capture path.");
+            receipt = resolved + ".result";
+            if (capturing) { BrowserBridge.WriteReceipt(receipt, "Another capture is active. Please retry."); return; }
+            capturing = true;
+            ownsCapture = true;
+            using (var bitmap = new System.Drawing.Bitmap(resolved)) await Finish(bitmap);
+            File.Delete(resolved);
+            BrowserBridge.WriteReceipt(receipt, "ok");
+        }
+        catch (Exception error) { status.Text = "Browser capture failed: " + error.Message; if (receipt != null) BrowserBridge.WriteReceipt(receipt, error.Message); }
+        finally { if (ownsCapture) capturing = false; }
+    }
     private void OpenFolder() { try { Directory.CreateDirectory(settings.Folder); Process.Start(new ProcessStartInfo(settings.Folder) { UseShellExecute = true }); } catch (Exception e) { status.Text = e.Message; ShowApp(); } }
     public async void BeginCapture(bool area)
     {

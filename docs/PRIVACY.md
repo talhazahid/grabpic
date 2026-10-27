@@ -1,12 +1,16 @@
 # Grabpic privacy policy
 
-Effective date: 26 October 2026
+Effective date: 27 October 2026
 
 Grabpic is an open-source Windows screenshot application published by Owl Dev.
 
 ## Your images stay local
 
 Grabpic captures visible screen content when you request a screenshot. It saves images to a folder you choose and, by default, copies them to the Windows clipboard. The app does not upload screenshots, create an account, send analytics, or include advertising.
+
+## Optional browser companion
+
+The companion extension adds browser right-click capture actions. After you invoke an action, it reads the active page's dimensions and scroll position and captures webpage pixels. Full-page capture temporarily scrolls the page and hides repeated fixed elements, then restores the page. It communicates only with the local Grabpic native-messaging companion; it does not upload page content, collect browsing history, or send analytics. A temporary local PNG is removed after successful saving; unsuccessful transfers may leave an image in the app's local BrowserInbox folder, which you can delete. The extension must be enabled separately in each supported browser.
 
 ## Clipboard monitoring is optional
 

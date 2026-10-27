@@ -13,6 +13,8 @@ public partial class App : Application
         if (e.Args.Length == 2 && e.Args[0] == "--verify") { Verification.Run(e.Args[1]); Shutdown(); return; }
         if (e.Args.Length == 1 && (e.Args[0] == "--menu-enable" || e.Args[0] == "--menu-remove")) { try { Integration.WriteMenu(e.Args[0] == "--menu-enable", true); Shutdown(0); } catch { Shutdown(1); } return; }
         if (e.Args.Length == 1 && e.Args[0] == "quit") { CommandBus.Send("quit"); Shutdown(); return; }
+        if (Environment.GetEnvironmentVariable("GRABPIC_SCREENSHOT_MODE") != "1")
+            try { BrowserBridge.Register(); } catch (Exception error) { System.Diagnostics.Debug.WriteLine(error.Message); }
         base.OnStartup(e); mutex = new Mutex(true, "Local\\GrabPic.App" + Preferences.InstanceSuffix, out bool first);
         if (!first) { CommandBus.Send(e.Args.Length > 0 ? e.Args[0] : "show"); Shutdown(); return; }
         DispatcherUnhandledException += (_, a) => { MessageBox.Show(a.Exception.Message, "Grab Pic"); a.Handled = true; };

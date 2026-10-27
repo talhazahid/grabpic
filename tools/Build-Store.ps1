@@ -6,6 +6,7 @@ if(!$SkipPublish) {
  dotnet publish "$root/src/GrabPic" -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o "$root/dist/GrabPic"
  if($LASTEXITCODE -ne 0) { throw 'App publishing failed.' }
 }
+& "$PSScriptRoot/Build-Browser.ps1"
 dotnet restore "$root/packaging/BuildTools.csproj"
 if($LASTEXITCODE -ne 0) { throw 'Windows packaging tools could not be restored.' }
 [xml]$project=Get-Content "$root/packaging/BuildTools.csproj"
@@ -32,6 +33,9 @@ $version=$manifest.Package.Identity.Version
 $stage="$root/dist/MSIX/stage-$([Guid]::NewGuid().ToString('N'))"
 New-Item -ItemType Directory -Force "$stage/Assets","$root/submission/packages" | Out-Null
 Copy-Item "$root/dist/GrabPic/GrabPic.exe","$native/GrabPic.ShellExtension.dll","$native/GrabPic.Startup.exe" $stage
+Copy-Item "$root/dist/GrabPic/GrabPic.BrowserHost.exe" $stage
+Copy-Item "$root/dist/Browser" "$stage/BrowserExtensions" -Recurse
+Copy-Item "$root/docs/BROWSERS.md" "$stage/BrowserExtensions/README.md"
 Copy-Item "$root/packaging/Assets/*" "$stage/Assets"
 Copy-Item "$root/packaging/AppxManifest.template.xml" "$stage/AppxManifest.xml"
 Copy-Item "$root/LICENSE" "$stage/LICENSE.txt"

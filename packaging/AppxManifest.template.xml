@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10" xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4" xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5" xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap desktop desktop4 desktop5 com rescap">
- <Identity Name="Geeklabs.GrabPic" Publisher="CN=5B135F6F-4181-4A69-A7BE-6BAA39528EBE" Version="0.5.1.0" ProcessorArchitecture="x64"/>
- <Properties><DisplayName>Grab Pic</DisplayName><PublisherDisplayName>Owl Dev</PublisherDisplayName><Description>A simple, open-source screenshot tool for Windows.</Description><Logo>Assets\StoreLogo.png</Logo></Properties>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10" xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4" xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5" xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" xmlns:virtualization="http://schemas.microsoft.com/appx/manifest/virtualization/windows10" IgnorableNamespaces="uap desktop desktop4 desktop5 com rescap virtualization">
+ <Identity Name="Geeklabs.GrabPic" Publisher="CN=5B135F6F-4181-4A69-A7BE-6BAA39528EBE" Version="0.6.0.0" ProcessorArchitecture="x64"/>
+ <Properties><DisplayName>Grab Pic</DisplayName><PublisherDisplayName>Owl Dev</PublisherDisplayName><Description>A simple, open-source screenshot tool for Windows.</Description><Logo>Assets\StoreLogo.png</Logo>
+  <virtualization:RegistryWriteVirtualization><virtualization:ExcludedKeys>
+   <virtualization:ExcludedKey>HKEY_CURRENT_USER\Software\Google\Chrome\NativeMessagingHosts\com.owl.grabpic</virtualization:ExcludedKey>
+   <virtualization:ExcludedKey>HKEY_CURRENT_USER\Software\Microsoft\Edge\NativeMessagingHosts\com.owl.grabpic</virtualization:ExcludedKey>
+   <virtualization:ExcludedKey>HKEY_CURRENT_USER\Software\Mozilla\NativeMessagingHosts\com.owl.grabpic</virtualization:ExcludedKey>
+  </virtualization:ExcludedKeys></virtualization:RegistryWriteVirtualization>
+  <virtualization:FileSystemWriteVirtualization><virtualization:ExcludedDirectories>
+   <virtualization:ExcludedDirectory>$(KnownFolder:LocalAppData)\GrabPic\BrowserBridge</virtualization:ExcludedDirectory>
+   <virtualization:ExcludedDirectory>$(KnownFolder:LocalAppData)\GrabPic\BrowserInbox</virtualization:ExcludedDirectory>
+  </virtualization:ExcludedDirectories></virtualization:FileSystemWriteVirtualization>
+ </Properties>
  <Resources><Resource Language="en-us"/></Resources>
  <Dependencies><TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.22000.0" MaxVersionTested="10.0.26100.0"/></Dependencies>
  <Applications><Application Id="GrabPic" Executable="GrabPic.exe" EntryPoint="Windows.FullTrustApplication">
@@ -12,5 +22,5 @@
    <desktop4:Extension Category="windows.fileExplorerContextMenus"><desktop4:FileExplorerContextMenus><desktop5:ItemType Type="Directory\Background"><desktop5:Verb Id="GrabPic" Clsid="4D57B652-A8D7-4DDA-A7FA-49A617B76290"/></desktop5:ItemType></desktop4:FileExplorerContextMenus></desktop4:Extension>
   </Extensions>
  </Application></Applications>
- <Capabilities><rescap:Capability Name="runFullTrust"/></Capabilities>
+ <Capabilities><rescap:Capability Name="runFullTrust"/><rescap:Capability Name="unvirtualizedResources"/></Capabilities>
 </Package>

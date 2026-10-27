@@ -119,6 +119,7 @@ public static class Integration
 public static class CommandBus
 {
     private static string PipeName => "GrabPic." + Environment.UserName + Preferences.InstanceSuffix;
-    public static void Send(string command) { try { using var pipe = new NamedPipeClientStream(".", PipeName, PipeDirection.Out); pipe.Connect(2000); using var writer = new StreamWriter(pipe); writer.WriteLine(command); } catch { } }
+    public static void Send(string command) => TrySend(command, 2000);
+    public static bool TrySend(string command, int timeout) { try { using var pipe = new NamedPipeClientStream(".", PipeName, PipeDirection.Out); pipe.Connect(timeout); using var writer = new StreamWriter(pipe); writer.WriteLine(command); return true; } catch { return false; } }
     public static void Listen(Action<string> action) => Task.Run(async () => { while (true) { try { using var pipe = new NamedPipeServerStream(PipeName, PipeDirection.In, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous | PipeOptions.CurrentUserOnly); await pipe.WaitForConnectionAsync(); using var reader = new StreamReader(pipe); var command = await reader.ReadLineAsync(); if (command != null) action(command); } catch { await Task.Delay(500); } } });
 }

@@ -2,6 +2,8 @@
 
 # Grabpic
 
+New in 0.6.0: optional browser right-click capture for scrolling webpages, the visible webpage view, and area selection. Requires the separately enabled [browser companion](docs/BROWSERS.md); test packages are included with the submission bundle. Public browser-store publication is separate from the Windows Store app.
+
 **Capture. Copy. Carry on.**
 
 Grabpic is a free, open-source screenshot app for Windows. Grab your full screen or drag to select an area, get the image on your clipboard, and let Grabpic keep your captures neatly organized. It stays quietly in the system tray until you need it.
