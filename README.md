@@ -28,7 +28,7 @@ The Store listing becomes downloadable after Microsoft approves and publishes th
 
 ## Get started
 
-1. Download `GrabPic-Setup-0.5.1-x64.exe` from [Releases](https://github.com/talhazahid/grabpic/releases/latest), or install from the Store once published.
+1. Download the latest `GrabPic-Setup-<version>-x64.exe` from [Releases](https://github.com/talhazahid/grabpic/releases/latest), or install from the Store once published.
 2. Run setup. It adds the desktop menu and starts Grabpic in the tray. The standard installer requests administrator access to register its system-wide menu.
 3. Use a capture shortcut, the tray menu, or right-click empty desktop space and choose **Grab Pic**. For the standard installer on Windows 11, use **Show more options**.
 4. Paste the image wherever you need it. Your saved copy is already in the capture folder.
@@ -63,6 +63,14 @@ ShareX was reviewed as research material during early development. Its source is
 
 ## Build it yourself
 
+### Architecture and macOS handoff
+
+The complete Windows application, native shell and browser-host code, browser extension, assets, packaging scripts, website, and QA tools are in this repository. Start with [CLAUDE.md](CLAUDE.md), the [architecture/source map](docs/ARCHITECTURE.md), and the [macOS porting guide](docs/MACOS-PORT.md). Repository rules are in [AGENTS.md](AGENTS.md).
+
+The macOS guide covers feature parity, proposed native APIs, permissions, Retina/multiple displays, background lifecycle, browser integration, design tokens, and acceptance tests. There is no macOS implementation yet; the existing Windows executable and WPF UI cannot run natively on macOS. Add a native implementation under `macos/` while preserving the Windows app.
+
+### Windows build
+
 Install the .NET 8 SDK and use PowerShell on Windows:
 
 ```powershell
@@ -94,4 +102,4 @@ Public screenshots are captured from the real app using an isolated profile and 
 
 ## Current scope
 
-The current release focuses on still screenshots. It does not include image annotation, scrolling capture, recording, or uploading. Protected content may be unavailable, and HDR color accuracy needs wider validation. Store certification and availability are controlled by Microsoft.
+The current release focuses on still screenshots. Version 0.6.0 adds optional browser scrolling-page capture through the separately enabled companion extension; it does not include a general extension-free scrolling capture engine, image annotation, recording, or uploading. Browser extensions require their own publication/signing; see [browser setup and limits](docs/BROWSERS.md). Protected content may be unavailable, and HDR color accuracy needs wider validation. Store certification and availability are controlled by Microsoft. macOS is currently a documented porting plan, not a shipped build.
