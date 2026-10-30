@@ -2,7 +2,7 @@
 
 This repository contains the complete Grabpic Windows 0.6.0 application, companion browser-extension source, native Windows shell integration, icons, website, packaging scripts, and QA tools. The owner wants to use this source as the reference for a native macOS port.
 
-**There is no macOS app in this repository yet.** WPF, WinForms, Win32 hooks, System.Drawing, registry integration, and MSIX packaging cannot simply be retargeted to macOS.
+A native macOS implementation now lives in `macos/` (version 0.7.0). Read [macos/README.md](macos/README.md) for build instructions, verified behavior, and limits. Windows remains version 0.6.0. WPF and Windows packaging remain Windows-specific.
 
 ## Read in this order
 

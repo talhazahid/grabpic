@@ -1,6 +1,6 @@
 # Grabpic architecture and implementation reference
 
-Documentation baseline: Windows 0.6.0, source tag [v0.6.0](https://github.com/talhazahid/grabpic/tree/v0.6.0). This is a source handoff, not a claim that a macOS implementation exists. See [the macOS port plan](MACOS-PORT.md) for proposed replacements.
+Documentation baseline: Windows 0.6.0, source tag [v0.6.0](https://github.com/talhazahid/grabpic/tree/v0.6.0). This document remains the Windows source reference. A native macOS implementation now lives in [macos/](../macos/README.md); [the macOS port plan](MACOS-PORT.md) tracks parity and open work.
 
 ## Source map
 

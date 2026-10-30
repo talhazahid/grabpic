@@ -1,105 +1,128 @@
 <p align="center"><img src="docs/images/icon.png" width="88" alt="Grabpic purple camera icon"></p>
+<h1 align="center">Grabpic</h1>
+<p align="center">Capture. Copy. Carry on.</p>
+<p align="center">A quiet, local screenshot utility for Windows and macOS.<br>Full screen, a selected area, and an organized folder. Ready to paste.</p>
+<p align="center"><a href="https://github.com/talhazahid/grabpic/releases/tag/macos-v0.7.0">Download for macOS</a> · <a href="https://github.com/talhazahid/grabpic/releases/tag/v0.6.0">Download for Windows</a> · <a href="https://talhazahid.github.io/grabpic/">Website</a> · <a href="https://github.com/talhazahid/grabpic/issues">Report an issue</a></p>
 
-# Grabpic
+## Choose your platform
 
-New in 0.6.0: optional browser right-click capture for scrolling webpages, the visible webpage view, and area selection. Requires the separately enabled [browser companion](docs/BROWSERS.md); test packages are included with the submission bundle. Public browser-store publication is separate from the Windows Store app.
+| | macOS 0.7.0 | Windows 0.6.0 |
+|---|---|---|
+| Download | [Apple silicon ZIP](https://github.com/talhazahid/grabpic/releases/download/macos-v0.7.0/Grabpic-0.7.0-macOS-arm64.zip) | [x64 installer](https://github.com/talhazahid/grabpic/releases/download/v0.6.0/GrabPic-Setup-0.6.0-x64.exe) |
+| Requires | macOS 14+ · Apple silicon | Windows 11 · Intel/AMD x64 |
+| Full screen and area screenshots | Yes | Yes |
+| PNG / JPG, clipboard copy, date folders | Yes | Yes |
+| Full screen and area recording | MP4 · system audio · optional microphone | — |
+| Background access | Menu bar and keyboard shortcuts | Tray, desktop menu, keyboard and mouse shortcuts |
+| Browser scrolling capture | — | [Optional companion](docs/BROWSERS.md) |
 
-**Capture. Copy. Carry on.**
+The Mac download is ad-hoc signed and not notarized. Gatekeeper may block it; see [installation and limitations](macos/README.md). Intel Mac builds are not provided. Windows downloads and its release workflow remain available independently.
 
-Grabpic is a free, open-source screenshot app for Windows. Grab your full screen or drag to select an area, get the image on your clipboard, and let Grabpic keep your captures neatly organized. It stays quietly in the system tray until you need it.
+## Meet Grabpic for Mac
 
-[Website](https://talhazahid.github.io/grabpic/) · [Privacy policy](https://talhazahid.github.io/grabpic/privacy/) · [Download for Windows](https://github.com/talhazahid/grabpic/releases/latest) · [Microsoft Store listing](https://apps.microsoft.com/detail/9PJ3HBXBCTX1) · [Report an issue](https://github.com/talhazahid/grabpic/issues) · [GPL-3.0 license](LICENSE)
+Native SwiftUI and AppKit, with the same purple camera and calm dark interface.
 
-The Store listing becomes downloadable after Microsoft approves and publishes the submission. Windows installer releases are available independently.
+![Grabpic for macOS — capture and recording controls with a generated sample image](macos/docs/screenshots/capture.png)
 
-![Grabpic capture window](docs/images/01-capture.png)
+- Full screen or a selected area. Capture the display under the pointer, all displays, or drag a rectangle.
+- Ready to paste. Screenshots save locally and copy to the clipboard by default.
+- Keep things tidy. Choose your folder and group captures by day, ISO week, or month.
+- Record a moment. Record a screen or area to MP4, with system audio and optional microphone audio. Choose 30 or 60 fps, full resolution or 1080p, and pointer visibility.
+- Stay in your flow. Capture from the menu bar or a shortcut without opening the main window. Open the app explicitly to restore the latest capture.
+- Make it yours. Record keyboard shortcuts, enable start at login, and switch capture flash, shutter sound, or the menu bar icon on or off.
 
-## Small tool, useful details
+<details>
+<summary>macOS settings and shortcut recorder</summary>
 
-- **Full screen or just an area.** Capture the monitor under your pointer, all connected monitors, or a rectangle you choose.
-- **Ready to paste.** Captures copy to the clipboard automatically by default and save to your chosen folder.
-- **Neatly organized.** Group files into daily, ISO weekly, or monthly folders.
-- **Your shortcuts.** Record a key, combination, or mouse button for Full Screen, Grab Area, and Open Captures. Windows-key combinations such as Win + Shift + S are supported.
-- **Dark by default.** A calm interface with consistent controls and a slim scrollbar.
-- **Quiet in the background.** Taking a screenshot does not open the app. Start with Windows and capture from the tray or desktop menu.
-- **Pick up where you left off.** Open Grabpic to see the latest saved capture, even after restarting the app.
-- **PNG or JPG.** PNG is lossless; JPG quality defaults to 100 and can be adjusted.
-- **Local by design.** No account, uploads, ads, or analytics. Optional clipboard monitoring can save images copied from other apps.
+![Grabpic macOS settings](macos/docs/screenshots/settings.png)
 
-## Get started
+![Grabpic macOS shortcut recorder](macos/docs/screenshots/recorder.png)
 
-1. Download the latest `GrabPic-Setup-<version>-x64.exe` from [Releases](https://github.com/talhazahid/grabpic/releases/latest), or install from the Store once published.
-2. Run setup. It adds the desktop menu and starts Grabpic in the tray. The standard installer requests administrator access to register its system-wide menu.
-3. Use a capture shortcut, the tray menu, or right-click empty desktop space and choose **Grab Pic**. For the standard installer on Windows 11, use **Show more options**.
-4. Paste the image wherever you need it. Your saved copy is already in the capture folder.
+</details>
 
-**Requirements:** Windows 11, Intel/AMD x64. The .NET runtime is included. ARM64 and 32-bit builds are not provided in this release.
+### Install on macOS
 
-### Default shortcuts
+1. Download and unzip `Grabpic-0.7.0-macOS-arm64.zip` from the [macOS release](https://github.com/talhazahid/grabpic/releases/tag/macos-v0.7.0).
+2. Move `Grabpic.app` to Applications before enabling start at login.
+3. Open the app. This build has no Developer ID or notarization; macOS may require an explicit approval in System Settings → Privacy & Security. Only approve a download whose source you trust.
+4. Grant Screen Recording permission when prompted, then relaunch. Microphone permission is needed only when microphone recording is enabled.
 
-| Action | Default |
-|---|---|
-| Grab full screen | Ctrl + Shift + 1 |
-| Grab area | Ctrl + Shift + 2 |
-| Open captures | Ctrl + Shift + 3 |
+The deployment target is macOS 14; this build was verified on an Apple silicon Mac running macOS 26.6.2. Other OS versions and physical multi-display configurations have not been verified in this release. Browser capture, mouse shortcuts, and Finder integration are not included on Mac. See [Mac documentation](macos/README.md) for the full test record and known limits.
 
-Change any binding in **Settings → Shortcuts**. When you assign a Windows-key combination, Grabpic handles it while it is running; quitting or clearing the binding restores Windows' normal behavior. Windows security shortcuts, including Win + L and Ctrl + Alt + Delete, cannot be reassigned. Mouse bindings pause while the app is focused so you can still edit them.
+## Grabpic for Windows
 
-![Custom shortcut settings](docs/images/02-shortcuts.png)
+The Windows app runs quietly in the tray, with native desktop-menu capture and optional browser capture.
 
-## Saving and privacy
+![Grabpic for Windows capture window](docs/images/01-capture.png)
 
-Choose a capture folder, date grouping, image format, and quality in Settings. Closing the window keeps Grabpic in the tray; use **Quit Grab Pic** to exit completely. Screenshots capture the currently visible desktop, not hidden virtual desktops.
+1. Download the [Windows x64 installer](https://github.com/talhazahid/grabpic/releases/tag/v0.6.0) and run setup. The standard installer requests administrator access for its system-wide desktop menu; the .NET runtime is included.
+2. Use a shortcut, the tray menu, or right-click empty desktop space → Grab Pic. On Windows 11, the standard installer's menu is under Show more options.
+3. Paste your screenshot. A saved copy is already in your capture folder.
 
-Your captures and preferences stay on your computer. A cloud-synced folder can still be synchronized by its provider. Clipboard monitoring is off by default; when enabled, it saves image content locally while Grabpic is running. See the [privacy policy](https://talhazahid.github.io/grabpic/privacy/).
+Windows supports configurable keyboard and mouse bindings, including Windows-key combinations such as Win + Shift + S. Protected security shortcuts cannot be reassigned. Mouse bindings pause while the app is focused. Optional full scrolling-page and visible-webpage capture require the separately enabled [browser companion](docs/BROWSERS.md); browser-store publication is separate.
 
-![Capture saving settings](docs/images/03-saving.png)
+<details>
+<summary>Windows shortcuts and saving settings</summary>
 
-## Open source
+![Windows shortcut settings](docs/images/02-shortcuts.png)
 
-Grabpic is released under the [GNU General Public License v3.0](LICENSE). You can study, modify, and share it under those terms. Contributions and [bug reports](https://github.com/talhazahid/grabpic/issues) are welcome.
+![Windows saving settings](docs/images/03-saving.png)
 
-ShareX was reviewed as research material during early development. Its source is not bundled or linked into this app. The application uses Windows capture APIs, WPF, and a small native shell extension for the Store package.
+</details>
 
-## Build it yourself
+[Microsoft Store listing](https://apps.microsoft.com/detail/9PJ3HBXBCTX1) — availability depends on Microsoft's approval and publication.
 
-### Architecture and macOS handoff
+## Default shortcuts
 
-The complete Windows application, native shell and browser-host code, browser extension, assets, packaging scripts, website, and QA tools are in this repository. Start with [CLAUDE.md](CLAUDE.md), the [architecture/source map](docs/ARCHITECTURE.md), and the [macOS porting guide](docs/MACOS-PORT.md). Repository rules are in [AGENTS.md](AGENTS.md).
+| Action | Windows | macOS |
+|---|---|---|
+| Grab full screen | Ctrl + Shift + 1 | Control + Shift + 1 |
+| Grab area | Ctrl + Shift + 2 | Control + Shift + 2 |
+| Open captures | Ctrl + Shift + 3 | Control + Shift + 3 |
+| Start / stop screen recording | — | Control + Shift + 5 |
 
-The macOS guide covers feature parity, proposed native APIs, permissions, Retina/multiple displays, background lifecycle, browser integration, design tokens, and acceptance tests. There is no macOS implementation yet; the existing Windows executable and WPF UI cannot run natively on macOS. Add a native implementation under `macos/` while preserving the Windows app.
+Change bindings in Settings → Shortcuts. Mac shortcuts use keyboard combinations; combinations reserved by macOS or already assigned in Grabpic are declined.
 
-### Windows build
+## Local by design
 
-Install the .NET 8 SDK and use PowerShell on Windows:
+No account, uploads, advertising, or analytics. Captures and preferences stay on your computer. Optional clipboard-image saving is off by default. A cloud-synced capture folder can still be synchronized by its provider. See the [privacy policy](docs/PRIVACY.md).
+
+Closing the window keeps Grabpic running in the tray or menu bar; use Quit Grab Pic to exit. Captures use the visible desktop, not hidden virtual desktops or Spaces. Neither platform includes annotation, OCR, or cloud sharing. Protected content may be unavailable; HDR accuracy needs wider validation.
+
+All product screenshots above use generated sample content, not personal captures.
+
+## Build from source
+
+### macOS
+
+Xcode 15+ or a compatible Swift toolchain and macOS SDK; no third-party dependencies.
+
+```bash
+cd macos
+./scripts/build.sh
+./scripts/run-logic-tests.sh
+./scripts/render-previews.sh
+open build/Grabpic.app
+```
+
+See [macOS source, QA, and limitations](macos/README.md).
+
+### Windows
+
+Install the .NET 8 SDK, then use PowerShell on Windows:
 
 ```powershell
 dotnet build src/GrabPic -c Release
 dotnet run --project src/GrabPic
-```
-
-To regenerate icons and build the standalone installer, install Inno Setup 6.6 or later:
-
-```powershell
 powershell -ExecutionPolicy Bypass -File tools/Build-Setup.ps1
 ```
 
-For the Microsoft Store package:
+Installer builds require Inno Setup 6.6+. For Store packaging, run `tools/Build-Store.ps1`; see [Store packaging](docs/STORE.md). Verify the published app with `dist/GrabPic/GrabPic.exe --verify verification.txt`.
 
-```powershell
-powershell -ExecutionPolicy Bypass -File tools/Build-Store.ps1
-```
+### Project reference
 
-The packaging script restores the pinned Microsoft SDK tools and a checksum-verified Zig C++ compiler. The manifest uses the registered `Geeklabs.GrabPic` identity. See [Store packaging](docs/STORE.md) and the [design system](DESIGN.md).
+[Architecture](docs/ARCHITECTURE.md) · [Design system](DESIGN.md) · [Contributor guide](CONTRIBUTING.md) · [Repository instructions](AGENTS.md) · [macOS parity plan](docs/MACOS-PORT.md)
 
-Run verification without opening the main UI:
+## Open source
 
-```powershell
-.\dist\GrabPic\GrabPic.exe --verify "$PWD\verification.txt"
-```
-
-Public screenshots are captured from the real app using an isolated profile and a generated sample image. They do not contain private desktop captures. The screenshots show an example custom area shortcut; fresh installs use the defaults listed above.
-
-## Current scope
-
-The current release focuses on still screenshots. Version 0.6.0 adds optional browser scrolling-page capture through the separately enabled companion extension; it does not include a general extension-free scrolling capture engine, image annotation, recording, or uploading. Browser extensions require their own publication/signing; see [browser setup and limits](docs/BROWSERS.md). Protected content may be unavailable, and HDR color accuracy needs wider validation. Store certification and availability are controlled by Microsoft. macOS is currently a documented porting plan, not a shipped build.
+Grabpic is free software under the [GNU General Public License v3.0](LICENSE). Contributions and bug reports are welcome. Third-party notices remain in [packaging/Licenses](packaging/Licenses). ShareX was reviewed as research material; its source is not bundled or linked into the app.

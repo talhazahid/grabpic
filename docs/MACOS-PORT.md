@@ -1,6 +1,6 @@
 # Grabpic macOS port: implementation handoff
 
-Prepared 28 October 2026 from the Windows 0.6.0 source. This file is a proposed plan and acceptance contract. **No macOS implementation, build, signing identity, or verified Mac behavior is included yet.** Read [CLAUDE.md](../CLAUDE.md) and [ARCHITECTURE.md](ARCHITECTURE.md), then inspect the source.
+Prepared 28 October 2026 from the Windows 0.6.0 source. This file remains the acceptance contract for the port. An implementation now exists in [macos/](../macos/README.md) and covers capture, saving, clipboard, shortcuts, settings, capture feedback, login item, and the menu-bar lifecycle. Browser native messaging, distribution signing, and multi-display hardware QA are still open. Read [CLAUDE.md](../CLAUDE.md) and [ARCHITECTURE.md](ARCHITECTURE.md), then inspect the source.
 
 ## Intended outcome
 
@@ -14,7 +14,7 @@ Use SwiftUI for the primary interface and AppKit where native window/menu/input 
 
 This is a recommendation, not existing Swift code. Prefer a small set of focused native services over putting capture, permissions, persistence, input hooks, and all views in one file. The Windows app mixes those responsibilities for its current small scope; its behavior is the reference, not a required structural pattern.
 
-Suggested layout (not created yet):
+Suggested layout (the implementation follows this shape, with `QA/` instead of `Tests/`):
 
 ```text
 macos/
@@ -73,6 +73,7 @@ Use only public supported platform APIs. Do not fabricate Windows-style hooks in
 | Background lifecycle | Menu-bar operation; close hides settings; explicit Quit exits | App.xaml / App.xaml.cs |
 | Login launch | Configurable native login item; background start without opening settings | Integration.Startup |
 | Clipboard monitor | Off by default; image-only; own-write suppression; no duplicate-save loops | MainWindow.ClipboardTick |
+| Capture feedback | Optional subtle full-display flash and system shutter, both switchable, never in the saved image | none — Mac addition |
 | Browser full page/view/area | Shared extension with new Mac host, same local save settings | browser-extension/shared + BrowserBridge |
 | Dark design | Regular weights, consistent hierarchy, custom restrained scrolling | DESIGN.md / Theme.xaml |
 
@@ -103,7 +104,7 @@ Use native login-item state and surface any user approval needed. Do not automat
 
 ## Background lifecycle and shortcuts
 
-Use a menu-bar item for Full screen, Area, Open captures, Open Grabpic, and Quit. Closing settings does not quit. A capture from the menu bar/shortcut/browser must not activate/reopen settings. An explicit open action does activate settings and restore the latest saved capture.
+Use a menu-bar item for Full screen, Area, Open captures, Open Grabpic, and Quit. Closing settings does not quit. A capture from the menu bar/shortcut/browser must not activate/reopen settings. An explicit open action does activate settings and restore the latest saved capture. Open captures lands on the folder captures made now would use (today, this ISO week, or this month), falling back to the capture root. The menu bar icon itself can be hidden from Settings; the window and shortcuts then remain the way back in.
 
 Preserve the filled purple camera app/Dock identity. For the menu-bar status item, test macOS template rendering and contrast in light/dark menu bars; any deliberate monochrome status-item adaptation should be documented while keeping the camera shape consistent.
 
@@ -170,10 +171,12 @@ Record actual macOS version, Xcode version, architecture, display arrangement/sc
 - [ ] Verify PNG pixels, JPG quality control, default quality 100, local dates, New Year ISO-week boundaries, unique filenames, and folder changes.
 - [ ] Verify slow/read-only/offline folders, stale access bookmarks, disk-full errors, and no accidental overwrite.
 - [ ] Paste a capture into another app; verify clipboard-busy failure leaves the saved file intact.
+- [ ] Toggle capture flash and shutter in Settings; confirm feedback plays after the frame, never appears inside the saved image, and stays silent when switched off.
 - [ ] Enable optional clipboard saving, copy external image/text, check no duplicate/self-save loops, then disable it.
 - [ ] Reopen after restart and recover the latest image; handle deleted images and stale async navigation.
 - [ ] Record valid/conflicting/modifier-only/reserved bindings; test repeat suppression, keyboard layout, mouse behavior, failed persistence, and permission changes.
 - [ ] Enable/disable login launch and verify no main-window flash; respect a system-disabled login item.
+- [ ] Hide and show the menu bar icon; confirm the window and shortcuts still work with it hidden, and that "Open captures" lands on the current day/week/month folder.
 - [ ] Load companion extension in each claimed browser; test actual right-click → capture → Mac host → app → folder/clipboard, not only mocked APIs.
 - [ ] Test full-page standards/quirks modes, long/wide pages, zoom/Retina, fixed headers, last-tile overlap, lazy-load change rejection, cancellation, tab switch, size limit, and bottom-right image pixels.
 - [ ] Test encoded native-message byte limits, malformed input, cold-start timeout, concurrent actions, save acknowledgment, and transfer cleanup.

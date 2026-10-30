@@ -12,3 +12,5 @@ packaging/obj/
 *.cer
 *.user
 *_wpftmp.csproj
+macos/build/
+macos/Resources/Grabpic.icns
