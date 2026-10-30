@@ -94,6 +94,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                     self?.state.stopRecording()
                 }
             }
+            for delay in [10.0, 13.0, 16.0] {
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+                    MainActor.assumeIsolated { self?.debugLog("idle after stop +\(Int(delay - 7))s") }
+                }
+            }
         case .background, .show, .none: break
         }
     }
